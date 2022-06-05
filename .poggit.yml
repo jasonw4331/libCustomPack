@@ -1,6 +1,6 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/jasonwynn10/libCustomPack
 projects:
-  libpmquery:
+  libCustomPack:
     type: library
     model: virion
 ...
