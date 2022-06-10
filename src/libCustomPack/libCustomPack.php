@@ -31,7 +31,7 @@ final class libCustomPack{
 		$newFileName = (new ZippedResourcePack($outputFilePath))->getPackName().'.mcpack';
 		assert(!rename($outputFilePath, $newFileName)); // TODO: does the ZippedResourcePack get freed before this happens?
 
-		return new ZippedResourcePack($newFileName);
+		return new ZippedResourcePack(Path::join($plugin->getDataFolder(), $newFileName));
 	}
 
 	final public static function generatePackFromPath(PluginBase $plugin, string $inputFilePath, ?string $packFolderName = null) : ZippedResourcePack {
