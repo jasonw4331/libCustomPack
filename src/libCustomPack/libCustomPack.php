@@ -28,10 +28,10 @@ final class libCustomPack{
 		$zip->close();
 		Filesystem::recursiveUnlink(Path::join($plugin->getDataFolder(), $packFolderName)); // clean up
 
-		$newFileName = (new ZippedResourcePack($outputFilePath))->getPackName().'.mcpack';
-		assert(!rename($outputFilePath, $newFileName)); // TODO: does the ZippedResourcePack get freed before this happens?
+		// $newFileName = (new ZippedResourcePack($outputFilePath))->getPackName().'.mcpack';
+		// assert(!rename($outputFilePath, $newFileName)); // TODO: does the ZippedResourcePack get freed before this happens?
 
-		return new ZippedResourcePack(Path::join($plugin->getDataFolder(), $newFileName));
+		return new ZippedResourcePack($$outputFilePath);
 	}
 
 	final public static function generatePackFromPath(PluginBase $plugin, string $inputFilePath, ?string $packFolderName = null) : ZippedResourcePack {
