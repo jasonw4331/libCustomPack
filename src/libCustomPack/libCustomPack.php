@@ -29,7 +29,7 @@ final class libCustomPack{
 		Filesystem::recursiveUnlink(Path::join($plugin->getDataFolder(), $packFolderName)); // clean up
 
 		$newFileName = (new ZippedResourcePack($outputFilePath))->getPackName().'.mcpack';
-		assert(!rename($outputFilePath, $newFileName)); // TODO: does the ZippedResourcePack get freed before this happens?
+		assert(rename($outputFilePath, $newFileName));
 
 		return new ZippedResourcePack(Path::join($plugin->getDataFolder(), $newFileName));
 	}
