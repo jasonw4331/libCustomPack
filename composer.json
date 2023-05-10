@@ -1,7 +1,6 @@
 {
 	"name": "jasonw4331/libcustompack",
 	"description": "A library for compiling and registering resource packs with PocketMine",
-	"version": "1.0.0",
 	"type": "library",
 	"minimum-stability": "stable",
 	"license": "LGPL-3.0-or-later",
