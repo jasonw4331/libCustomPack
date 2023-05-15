@@ -13,7 +13,6 @@ use function array_search;
 use function assert;
 use function copy;
 use function is_string;
-use function mb_strtolower;
 use function preg_replace;
 use function rename;
 use function str_contains;
@@ -78,52 +77,20 @@ final class libCustomPack{
 		return new ZippedResourcePack($newFileName);
 	}
 
-	final public static function registerResourcePack(ResourcePack $resourcePack) : void {
+	final public static function registerResourcePack(ResourcePack $resourcePack, ?string $encryptionKey = null) : void {
 		$manager = Server::getInstance()->getResourcePackManager();
-
-		$reflection = new \ReflectionClass($manager);
-
-		$property = $reflection->getProperty("resourcePacks");
-		$property->setAccessible(true);
-		/** @var ResourcePack[] $currentResourcePacks */
-		$currentResourcePacks = $property->getValue($manager);
-		$currentResourcePacks[] = $resourcePack;
-		$property->setValue($manager, $currentResourcePacks);
-
-		$property = $reflection->getProperty("uuidList");
-		$property->setAccessible(true);
-		/** @var array<string, ResourcePack> $currentUUIDPacks */
-		$currentUUIDPacks = $property->getValue($manager);
-		$currentUUIDPacks[mb_strtolower($resourcePack->getPackId())] = $resourcePack;
-		$property->setValue($manager, $currentUUIDPacks);
-
-		$property = $reflection->getProperty("serverForceResources");
-		$property->setAccessible(true);
-		$property->setValue($manager, true);
+		$manager->setResourceStack($manager->getResourceStack() + [$resourcePack]);
+		$manager->setPackEncryptionKey($resourcePack->getPackId(), $encryptionKey);
 	}
 
 	final public static function unregisterResourcePack(ResourcePack $resourcePack) : void {
 		$manager = Server::getInstance()->getResourcePackManager();
-
-		$reflection = new \ReflectionClass($manager);
-
-		$property = $reflection->getProperty("resourcePacks");
-		$property->setAccessible(true);
-		/** @var ResourcePack[] $currentResourcePacks */
-		$currentResourcePacks = $property->getValue($manager);
-		$key = array_search($resourcePack, $currentResourcePacks, true);
+		$stack = $manager->getResourceStack();
+		$key = array_search($resourcePack, $stack, true);
 		if($key !== false){
-			unset($currentResourcePacks[$key]);
-			$property->setValue($manager, $currentResourcePacks);
-		}
-
-		$property = $reflection->getProperty("uuidList");
-		$property->setAccessible(true);
-		/** @var array<string, ResourcePack> $currentUUIDPacks */
-		$currentUUIDPacks = $property->getValue($manager);
-		if(isset($currentResourcePacks[mb_strtolower($resourcePack->getPackId())])) {
-			unset($currentUUIDPacks[mb_strtolower($resourcePack->getPackId())]);
-			$property->setValue($manager, $currentUUIDPacks);
+			unset($stack[$key]);
+			$manager->setResourceStack($stack);
+			$manager->setPackEncryptionKey($resourcePack->getPackId(), null);
 		}
 	}
 
