@@ -54,6 +54,9 @@ final class libCustomPack{
 		$zip = new \ZipArchive();
 		$outputFilePath = Path::join($plugin->getDataFolder(), $plugin->getName() . '.mcpack');
 		$zip->open($outputFilePath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+		/**
+		 * @var \SplFileInfo $resource
+		 */
 		foreach(new \RecursiveDirectoryIterator($inputFilePath,
 			\FilesystemIterator::KEY_AS_PATHNAME | \FilesystemIterator::CURRENT_AS_FILEINFO | \FilesystemIterator::SKIP_DOTS) as
 			$resource
