@@ -19,7 +19,7 @@
 	},
 	"require-dev": {
 		"phpstan/phpstan": "^1.4.6",
-		"pocketmine/pocketmine-mp": "^4.0.0",
+		"pocketmine/pocketmine-mp": "^4.12.3|^5.0.0",
 		"phpstan/phpstan-strict-rules": "^1.0",
 		"phpstan/extension-installer": "^1.0",
 		"symfony/filesystem": "^5.4",

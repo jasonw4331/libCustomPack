@@ -1,8 +1,7 @@
 name: libCustomPack
-version: 1.0.0
+version: 1.0.1
 antigen: libCustomPack
-php:
- - 7.4
- - 8.0
- - 8.1
+api:
+ - 4.12.3
+ - 5.0.0
 author: "jasonw4331"
