@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace libCustomPack;
 
 use pocketmine\plugin\PluginBase;
@@ -20,7 +21,7 @@ use function str_replace;
 
 final class libCustomPack{
 
-	final public static function generatePackFromResources(PluginBase $plugin, ?string $packFolderName = null) : ZippedResourcePack {
+	final public static function generatePackFromResources(PluginBase $plugin, ?string $packFolderName = null) : ZippedResourcePack{
 		$packFolderName ??= $plugin->getName() . ' Pack';
 		$packFolderRegex = str_replace(' ', '\h', $packFolderName);
 
@@ -47,7 +48,7 @@ final class libCustomPack{
 		return new ZippedResourcePack(Path::join($plugin->getDataFolder(), $newFileName));
 	}
 
-	final public static function generatePackFromPath(PluginBase $plugin, string $inputFilePath, ?string $packFolderName = null) : ZippedResourcePack {
+	final public static function generatePackFromPath(PluginBase $plugin, string $inputFilePath, ?string $packFolderName = null) : ZippedResourcePack{
 		$packFolderName ??= $plugin->getName() . ' Pack';
 		$packFolderRegex = str_replace(' ', '\h', $packFolderName);
 
@@ -80,13 +81,13 @@ final class libCustomPack{
 		return new ZippedResourcePack($newFileName);
 	}
 
-	final public static function registerResourcePack(ResourcePack $resourcePack, ?string $encryptionKey = null) : void {
+	final public static function registerResourcePack(ResourcePack $resourcePack, ?string $encryptionKey = null) : void{
 		$manager = Server::getInstance()->getResourcePackManager();
 		$manager->setResourceStack($manager->getResourceStack() + [$resourcePack]);
 		$manager->setPackEncryptionKey($resourcePack->getPackId(), $encryptionKey);
 	}
 
-	final public static function unregisterResourcePack(ResourcePack $resourcePack) : void {
+	final public static function unregisterResourcePack(ResourcePack $resourcePack) : void{
 		$manager = Server::getInstance()->getResourcePackManager();
 		$stack = $manager->getResourceStack();
 		$key = array_search($resourcePack, $stack, true);
