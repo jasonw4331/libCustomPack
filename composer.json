@@ -10,9 +10,9 @@
 	"minimum-stability": "beta",
 	"prefer-stable": true,
 	"autoload": {
-		"psr-4": {
-			"libCustomPack\\": "src/libCustomPack"
-		}
+		"classmap": [
+			"src"
+		]
 	},
 	"require": {
 		"php": "^8.0"

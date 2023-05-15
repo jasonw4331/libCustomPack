@@ -48,7 +48,7 @@ jobs:
           sed -i "s/version: .*/version: ${{ github.ref_name }}/g" virion.yml
 
       - name: Build plugin archive
-        run: php pharynx.phar -i . -f LICENSE -c -p=${{ github.workspace }}/${{ steps.get-manifest.outputs.NAME }}.phar
+        run: php pharynx.phar -s src -f LICENSE -c -p=${{ github.workspace }}/${{ steps.get-manifest.outputs.NAME }}.phar
 
       - name: Upload release artifacts
         uses: actions/upload-artifact@v3
