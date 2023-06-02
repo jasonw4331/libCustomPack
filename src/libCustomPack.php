@@ -9,6 +9,7 @@ use pocketmine\resourcepacks\ResourcePack;
 use pocketmine\resourcepacks\ZippedResourcePack;
 use pocketmine\Server;
 use pocketmine\utils\Filesystem;
+use pocketmine\utils\Utils;
 use Symfony\Component\Filesystem\Path;
 use function array_search;
 use function assert;
@@ -76,7 +77,7 @@ final class libCustomPack{
 		Filesystem::recursiveUnlink(Path::join($plugin->getDataFolder(), $packFolderName)); // clean up
 
 		$newFileName = (new ZippedResourcePack($outputFilePath))->getPackName() . '.mcpack';
-		assert(!rename($outputFilePath, $newFileName)); // TODO: does the ZippedResourcePack get freed before this happens?
+		Utils::assumeNotFalse(rename($outputFilePath, $newFileName)); // TODO: does the ZippedResourcePack get freed before this happens?
 
 		return new ZippedResourcePack($newFileName);
 	}
