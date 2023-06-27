@@ -1,4 +1,4 @@
---- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/jasonw4331/libCustomPack
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/taylordevs/libCustomPack
 projects:
   libCustomPack:
     type: library
